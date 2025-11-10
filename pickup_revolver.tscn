@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dis57ohj6jbs"]
+
+[ext_resource type="Script" uid="uid://dw8d4f07m6la8" path="res://pickup_revolver.gd" id="1_ffseq"]
+[ext_resource type="PackedScene" uid="uid://c6emc4kkwb1tt" path="res://weapon.tscn" id="2_87xf0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fg3ug"]
+size = Vector3(1, 0.662048, 1.26215)
+
+[node name="PickupRevolver" type="Node3D" groups=["weapons"]]
+script = ExtResource("1_ffseq")
+
+[node name="Weapon" parent="." instance=ExtResource("2_87xf0")]
+
+[node name="Area3D" type="Area3D" parent="Weapon"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Weapon/Area3D"]
+transform = Transform3D(0.466267, 0, 0, 0, 0.466267, 0, 0, 0, 0.466267, 0.201633, -0.051496, -1.15108)
+shape = SubResource("BoxShape3D_fg3ug")
+
+[connection signal="body_entered" from="Weapon/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Weapon/Area3D" to="." method="_on_area_3d_body_exited"]

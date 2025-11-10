@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://2486ovotryp7"]
+
+[ext_resource type="Script" uid="uid://vpk48kwj5hj" path="res://bullet.gd" id="1_4s4u5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ayd6b"]
+rough = true
+absorbent = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7awvy"]
+size = Vector3(0.145599, 0.213015, 0.168424)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ayd6b"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Bullet" type="RigidBody3D" parent="."]
+transform = Transform3D(0.0821253, 0, 0, 0, 0.0821253, 0, 0, 0, 0.0821253, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_ayd6b")
+script = ExtResource("1_4s4u5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bullet"]
+transform = Transform3D(1, 0, 0, 0, 0.00176279, 0.999998, 0, -0.999998, 0.00176279, 0.00759338, 0.149307, -0.0010582)
+shape = SubResource("BoxShape3D_7awvy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bullet"]
+transform = Transform3D(0.0811068, 0, 0, 0, 0.117042, 0, 0, 0, 0.183573, 0, 0.146552, 0)
+mesh = SubResource("BoxMesh_ayd6b")

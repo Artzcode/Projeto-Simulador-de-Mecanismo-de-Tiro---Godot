@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://epcle2mykhry"]
+
+[ext_resource type="Texture2D" uid="uid://c18xix6bj6f6g" path="res://Assents/PROTOTYPE TEXTURE/PNG/Dark/texture_04.png" id="1_tlwt5"]
+[ext_resource type="Material" uid="uid://cxfswpxtca5l1" path="res://orange_grid.tres" id="2_aqk2v"]
+[ext_resource type="Environment" uid="uid://c1wxd6e23c1em" path="res://env.tres" id="3_036b0"]
+[ext_resource type="PackedScene" uid="uid://bubryg5kfxwds" path="res://player.tscn" id="4_aqk2v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwbse"]
+albedo_texture = ExtResource("1_tlwt5")
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_036b0"]
+size = Vector3(100, 1, 100)
+
+[node name="World" type="Node3D"]
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_dwbse")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_036b0")
+
+[node name="Arch" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("2_aqk2v")
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Arch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+size = Vector3(4, 4, 4)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Arch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+operation = 2
+size = Vector3(4, 2, 2)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Arch"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 2, 0)
+operation = 2
+radius = 1.0
+height = 4.0
+sides = 32
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_036b0")
+
+[node name="Player" parent="." instance=ExtResource("4_aqk2v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.27397, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0103845, 0.999946, 0, -0.999946, -0.0103845, -5.81446, 0, -4.3815)
+shadow_enabled = true
